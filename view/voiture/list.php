@@ -7,7 +7,7 @@
     <body>
         <?php
             foreach ($tab_v as $v){
-                echo "<p> Immatriculation: {$v->getImmatriculation()} , Marque: {$v->getMarque()} , Couleur: {$v->getCouleur()} </p>";
+                echo "<p> Immatriculation: {$v->getImmatriculation()} </p>";
             }
         ?>
     </body>
