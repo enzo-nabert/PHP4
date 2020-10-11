@@ -14,6 +14,16 @@ class ControllerVoiture {
             $error = "<p>Voiture inexistante</p>";
             require ('../view/voiture/error.php');
         }
+    }
 
+    public static function create(){
+        require '../view/voiture/create.php';
+    }
+
+    public static function created(){
+        var_dump($_GET);
+        $voiture = new ModelVoiture($_GET);
+        $voiture->save();
+        self::readAll();
     }
 }

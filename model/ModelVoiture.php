@@ -40,18 +40,13 @@ class ModelVoiture {
   }
       
   // un constructeur
-  public function __construct($i = null, $m = null, $c = null)  {
-      if (!is_null($m) && !is_null($c) && !is_null($i)) {
-          $this->marque = $m;
-          $this->couleur = $c;
-          $this->immatriculation = $i;
+  public function __construct($data)  {
+      foreach ($data as $key => $value){
+          if($key != 'action') {
+              $this->$key = $value;
+          }
       }
-  } 
-           
-  // une methode d'affichage.
-//  public function afficher() {
-//    echo "<p>Immatriculation: $this->immatriculation , Marque: $this->marque , Couleur: $this->couleur</p>\n";
-//  }
+  }
 
   public static function getAllVoitures(){
       $pdo = Model::$pdo;
