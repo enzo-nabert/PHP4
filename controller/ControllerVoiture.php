@@ -21,9 +21,18 @@ class ControllerVoiture {
     }
 
     public static function created(){
-        var_dump($_GET);
         $voiture = new ModelVoiture($_GET);
-        $voiture->save();
+        if ($voiture->save() == false){
+            $error = "Voiture déjà créée";
+            require '../view/voiture/error.php';
+        }else {
+            self::readAll();
+        }
+    }
+
+    public static function delete(){
+        $voiture = ModelVoiture::getVoitureByImmat($_GET['immat']);
+        $voiture->delete();
         self::readAll();
     }
 }

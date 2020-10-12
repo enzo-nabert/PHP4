@@ -40,12 +40,13 @@ class ModelVoiture {
   }
       
   // un constructeur
-  public function __construct($data)  {
+  public function __construct($data = array())  {
       foreach ($data as $key => $value){
           if($key != 'action') {
               $this->$key = $value;
           }
       }
+
   }
 
   public static function getAllVoitures(){
@@ -84,12 +85,19 @@ class ModelVoiture {
           $req = $pdo->prepare($sql);
           $req->execute();
       }catch(PDOException $e){
-          if ($this->debug) {
-              echo $e->getMessage();
-          }else{
-              echo "erreur";
+          if ($e->getCode() == '23000'){
+              return false;
           }
       }
+      return true;
+  }
+
+  public function delete(){
+      $sql = "DELETE FROM voiture WHERE immatriculation = :immat";
+      $pdo = Model::$pdo;
+      $req = $pdo->prepare($sql);
+      $values = array('immat' => $this->immatriculation);
+      $req->execute($values);
   }
 }
 ?>
